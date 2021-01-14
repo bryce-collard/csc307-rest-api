@@ -40,12 +40,19 @@ def hello_world():
 def get_users():
    if request.method == 'GET':
       search_username = request.args.get('name')
+      search_job = request.args.get('job')
       if search_username :
          subdict = {'users_list' : []}
          for user in users['users_list']:
             if user['name'] == search_username:
                subdict['users_list'].append(user)
          return subdict
+      if search_job:
+         job_subdict = {'users_list' : []}
+         for user in users['users_list']:
+            if user['job'] == search_job:
+               job_subdict['users_list'].append(user)
+         return job_subdict
       return users
    elif request.method == 'POST':
       userToAdd = request.get_json()
