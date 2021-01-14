@@ -46,14 +46,15 @@ def get_users():
          for user in users['users_list']:
             if user['name'] == search_username:
                subdict['users_list'].append(user)
-         return subdict
+      else:
+         subdict = users
       if search_job:
-         job_subdict = {'users_list' : []}
-         for user in users['users_list']:
+         sub_subdict = {'users_list' : []}
+         for user in subdict['users_list']:
             if user['job'] == search_job:
-               job_subdict['users_list'].append(user)
-         return job_subdict
-      return users
+               sub_subdict['users_list'].append(user)
+         return sub_subdict
+      return subdict
    elif request.method == 'POST':
       userToAdd = request.get_json()
       users['users_list'].append(userToAdd)
