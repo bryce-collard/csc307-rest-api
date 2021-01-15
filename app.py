@@ -61,8 +61,7 @@ def get_users():
       userToAdd = request.get_json()
       users['users_list'].append(userToAdd)
       resp = jsonify(success=True)
-      #resp.status_code = 200 #optionally, you can always set a response code. 
-      # 200 is the default code for a normal response
+      resp.status_code = 201
       return resp
 
 @app.route('/users/<id>', methods=['GET', 'DELETE'])
