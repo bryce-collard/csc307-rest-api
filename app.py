@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import random, string
 app = Flask(__name__)
 CORS(app)
 
@@ -59,10 +60,20 @@ def get_users():
       return subdict
    elif request.method == 'POST':
       userToAdd = request.get_json()
+      if 'id' not in userToAdd:
+         userToAdd['id'] = generateRandomID()
       users['users_list'].append(userToAdd)
       resp = jsonify(success=True)
       resp.status_code = 201
       return resp
+
+# generates a random ID
+# obviously this is less than ideal; could generate a duplicate id, but doing
+# this naively for the sake of simplicity
+def generateRandomID():
+   letters = ''.join(random.choice(string.ascii_lowercase) for i in range(3))
+   numbers = ''.join(random.choice(string.digits) for i in range(3))
+   return letters + numbers
 
 @app.route('/users/<id>', methods=['GET', 'DELETE'])
 def get_user(id):
