@@ -63,7 +63,7 @@ def get_users():
       if 'id' not in userToAdd:
          userToAdd['id'] = generateRandomID()
       users['users_list'].append(userToAdd)
-      resp = jsonify(success=True)
+      resp = jsonify(userToAdd)
       resp.status_code = 201
       return resp
 
