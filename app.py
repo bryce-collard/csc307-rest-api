@@ -48,10 +48,3 @@ def get_user(id):
         resp = user.remove()
         status = 204 if resp.get('n') > 0 else 404
         return {}, status
-
-def find_users_by_name_job(name, job):
-    subdict = {'users_list' : []}
-    for user in users['users_list']:
-        if user['name'] == name and user['job'] == job:
-            subdict['users_list'].append(user)
-    return subdict  
